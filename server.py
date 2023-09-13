@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
-
 app = Flask(__name__)
 
-# Endpoint to check if the service is available
 @app.route('/calculator/greeting', methods=['GET'])
 def greeting():
     return "Hello world!"
@@ -22,7 +20,6 @@ def add_numbers():
 
 
 @app.route('/calculator/subtract', methods=['POST'])
-#subtract function
 def subtract_numbers():
     try:
         data = request.json
