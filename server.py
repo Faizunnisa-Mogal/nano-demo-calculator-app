@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 @app.route("/calculator/greeting", methods=['GET'])
@@ -34,3 +34,6 @@ def subtract():
             return "Invalid JSON format", 400
     except Exception as e:
         return str(e), 500
+
+if __name__ == '__main__':
+    app.run(port=5000, host='0.0.0.0')
