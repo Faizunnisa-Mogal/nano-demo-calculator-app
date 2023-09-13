@@ -7,7 +7,7 @@ app = Flask(__name__)
 def greeting():
     return "Hello world!"
 
-# Endpoint to add two numbers
+
 @app.route('/calculator/add', methods=['POST'])
 def add_numbers():
     try:
@@ -20,8 +20,9 @@ def add_numbers():
     except KeyError:
         return "Invalid request. Please provide 'first' and 'second' numbers in the request body.", 400
 
-# Endpoint to subtract two numbers
+
 @app.route('/calculator/subtract', methods=['POST'])
+#subtract function
 def subtract_numbers():
     try:
         data = request.json
