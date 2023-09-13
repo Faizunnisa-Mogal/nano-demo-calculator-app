@@ -1,39 +1,37 @@
 from flask import Flask, request, jsonify
+
 app = Flask(__name__)
 
-@app.route("/calculator/greeting", methods=['GET'])
+# Endpoint to check if the service is available
+@app.route('/calculator/greeting', methods=['GET'])
 def greeting():
-    return "Hello, World!", 200
+    return "Hello world!"
 
-@app.route("/calculator/add", methods=['POST'])
-def add():
+# Endpoint to add two numbers
+@app.route('/calculator/add', methods=['POST'])
+def add_numbers():
     try:
         data = request.get_json()
-        if "first" in data and "second" in data:
-            first = data["first"]
-            second = data["second"]
-            result = first + second
-            response_data = {"result": result}
-            return jsonify(response_data), 200
-        else:
-            return "Invalid JSON format", 400
-    except Exception as e:
-        return str(e), 500
+        first = data['first']
+        second = data['second']
+        result = first + second
+        response = {'result': result}
+        return jsonify(response)
+    except KeyError:
+        return "Invalid request. Please provide 'first' and 'second' numbers in the request body.", 400
 
-@app.route("/calculator/subtract", methods=['POST'])
-def subtract():
+# Endpoint to subtract two numbers
+@app.route('/calculator/subtract', methods=['POST'])
+def subtract_numbers():
     try:
-        data = request.get_json()
-        if "first" in data and "second" in data:
-            first = data["first"]
-            second = data["second"]
-            result = first - second
-            response_data = {"result": result}
-            return jsonify(response_data), 200
-        else:
-            return "Invalid JSON format", 400
-    except Exception as e:
-        return str(e), 500
+        data = request.json
+        first = data['first']
+        second = data['second']
+        result = first - second
+        response = {'result': result}
+        return jsonify(response)
+    except KeyError:
+        return "Invalid request. Please provide 'first' and 'second' numbers in the request body.", 400
 
 if __name__ == '__main__':
-    app.run(port=5000, host='0.0.0.0')
+    app.run(port=5000,host='0.0.0.0')
